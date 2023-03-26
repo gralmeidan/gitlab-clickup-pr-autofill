@@ -1,0 +1,14 @@
+{
+  "name": "Gitlab-Clickup Autofill",
+  "version": "0.0.1",
+  "description": "Autofills gitlab pull requests with clickup data",
+  "manifest_version": 3,
+  "author": "Gralmeidan",
+  "action": {
+    "default_title": "Click to autofill"
+  },
+  "permissions": ["activeTab", "scripting"],
+  "background": {
+    "service_worker": "dist/background.js"
+  }
+}
