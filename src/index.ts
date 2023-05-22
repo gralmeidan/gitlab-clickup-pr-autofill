@@ -58,7 +58,27 @@ const removeLoading = () => {
   document.getElementById('loading')?.remove();
 };
 
-const setReviewerToPedro = () => {
+const waitFor = (condition: Function): Promise<boolean> =>
+  new Promise((resolve, reject) => {
+    let isResolved = false;
+
+    const interval = setInterval(() => {
+      if (condition()) {
+        isResolved = true;
+        resolve(true);
+        clearInterval(interval);
+      }
+    }, 300);
+
+    setTimeout(() => {
+      if (!isResolved) {
+        clearInterval(interval);
+        reject(new Error('Timed out'));
+      }
+    }, 5000);
+  });
+
+const setReviewerToPedro = async () => {
   const [_, reviewer] = document.getElementsByClassName(
     'dropdown-toggle-text'
   ) as HTMLCollectionOf<HTMLSpanElement>;
@@ -71,20 +91,30 @@ const setReviewerToPedro = () => {
 
   reviewerSearchInput.value = 'Pedro Antonio';
 
-  setTimeout(() => {
+  const getReviewerLi = () => {
     const [__, reviewerResultsContainer] = document.getElementsByClassName(
       'dropdown-content'
     ) as HTMLCollectionOf<HTMLDivElement>;
 
     const [reviewerResults] =
-      reviewerResultsContainer.getElementsByTagName('ul');
+      reviewerResultsContainer?.getElementsByTagName('ul') ?? [];
 
-    const [firstResult] = reviewerResults.getElementsByTagName('li');
+    const [firstResult] = reviewerResults?.getElementsByTagName('li') ?? [];
 
-    firstResult.getElementsByTagName('a')[0].click();
+    return firstResult as HTMLLIElement | undefined;
+  };
 
-    removeLoading();
-  }, 2000);
+  await waitFor(() => {
+    const reviewer = getReviewerLi();
+
+    const [reviewerName] = reviewer?.getElementsByTagName('strong') ?? [];
+
+    return reviewerName?.textContent?.includes('Pedro Antonio');
+  });
+
+  getReviewerLi()!.getElementsByTagName('a')[0].click();
+
+  removeLoading();
 };
 
 (() => {
