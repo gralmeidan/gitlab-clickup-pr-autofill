@@ -34,7 +34,7 @@ const changePRTitle = () => {
   ) as HTMLInputElement;
 
   const prTitle = from!
-    .replace(/(\S+)_(CU-\S+)/, '[ $2 ] $1')
+    .replace(/(\S+)\W(CU\W\S+)/, '[ $2 ] $1')
     .replace(/\-/g, (match, index) => (index == 4 ? match : ' '));
 
   titleInput.value = prTitle;
