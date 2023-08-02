@@ -1,14 +1,14 @@
 {
-  "name": "Gitlab-Clickup Autofill",
-  "version": "0.0.1",
-  "description": "Autofills gitlab pull requests with clickup data",
+  "name": "Svelete Tailwind Chrome Extension",
+  "description": "Sample Extension using Svelte and Tailwind",
+  "version": "1.0",
   "manifest_version": 3,
-  "author": "Gralmeidan",
   "action": {
-    "default_title": "Click to autofill"
+    "default_popup": "src/popup/index.html"
   },
-  "permissions": ["activeTab", "scripting"],
-  "background": {
-    "service_worker": "dist/background.js"
-  }
+  "options_ui": {
+    "page": "src/options/index.html",
+    "open_in_tab": true
+  },
+  "permissions": ["storage"]
 }
