@@ -1,4 +1,6 @@
 <script lang="ts">
+  import TextInput from './TextInput.svelte';
+
   export let regex: string;
   export let replace: string;
   export let key: number;
@@ -7,26 +9,10 @@
 
 <div class="flex w-full gap-2 mb-4">
   <div class="flex-grow">
-    <input
-      type="text"
-      name="regex"
-      id="{key}-title-regex-value"
-      placeholder="RegEx"
-      class="placeholder:opacity-50"
-      spellcheck="false"
-      bind:value={regex}
-    />
+    <TextInput name="regex" placeholder="RegEx" bind:value={regex} />
   </div>
   <div>
-    <input
-      type="text"
-      name="replace"
-      id="{key}-title-replace-value"
-      placeholder="Replace"
-      class="placeholder:opacity-50"
-      spellcheck="false"
-      bind:value={replace}
-    />
+    <TextInput name="replace" placeholder="Replace" bind:value={replace} />
   </div>
   {#if key != 0}
     <div class="flex flex-col">
@@ -38,10 +24,3 @@
     </div>
   {/if}
 </div>
-
-<style>
-  input {
-    font-family: 'Ubuntu Mono', monospace;
-    @apply text-base mb-0;
-  }
-</style>

@@ -3,6 +3,7 @@
   import type { Configs } from 'src/types/configs.types';
   import { onMount } from 'svelte';
   import TitleConfig from './TitleConfig.svelte';
+  import TextInput from './TextInput.svelte';
 
   const STORAGE_KEY = 'autofill-configs';
 
@@ -36,14 +37,25 @@
 </script>
 
 <main class="container lg:max-w-screen-lg">
-  <TitleConfig
-    bind:configs={configs.title.value}
-    bind:checked={configs.title.enabled}
-  />
   <OptionInput
     label="Assign to me"
     name="assignToMe"
     bind:checked={configs.assignToMe}
   />
+  <TitleConfig
+    bind:configs={configs.title.value}
+    bind:checked={configs.title.enabled}
+  />
+  <OptionInput
+    label="Autofill reviewer"
+    bind:checked={configs.reviewer.enabled}
+    name="reviewer-enabled"
+  >
+    <TextInput
+      bind:value={configs.reviewer.value}
+      name="reviewer"
+      placeholder="Reviewer"
+    />
+  </OptionInput>
   <button on:click={handleSave}>save</button>
 </main>
