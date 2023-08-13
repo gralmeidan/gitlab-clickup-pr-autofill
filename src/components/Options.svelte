@@ -57,5 +57,5 @@
       placeholder="Reviewer"
     />
   </OptionInput>
-  <button on:click={handleSave}>save</button>
+  <button on:click={handleSave} class="py-2 text-lg my-4">SAVE</button>
 </main>
