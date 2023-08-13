@@ -12,7 +12,7 @@
       value: '',
     },
     title: {
-      enabled: true,
+      enabled: false,
       value: [
         {
           regex: 'regular exp(re)ssion',
@@ -35,6 +35,9 @@
 </script>
 
 <main class="container lg:max-w-screen-lg">
-  <TitleConfig bind:configs={configs.title.value} />
+  <TitleConfig
+    bind:configs={configs.title.value}
+    bind:enabled={configs.title.enabled}
+  />
   <button on:click={handleSave}>save</button>
 </main>
