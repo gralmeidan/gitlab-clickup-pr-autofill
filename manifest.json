@@ -10,5 +10,8 @@
     "page": "src/options/index.html",
     "open_in_tab": true
   },
-  "permissions": ["storage"]
+  "background": {
+    "service_worker": "src/background.ts"
+  },
+  "permissions": ["storage", "activeTab", "scripting"]
 }
