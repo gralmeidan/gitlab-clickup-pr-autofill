@@ -4,7 +4,7 @@
 
   export let configs: RegexConfig[];
 
-  function addConfig() {
+  function addField() {
     configs = [
       ...configs,
       {
@@ -13,16 +13,21 @@
       },
     ];
   }
+
+  function removeField(index: number) {
+    configs.splice(index, 1);
+    configs = configs;
+  }
 </script>
 
 <section>
   <h1>Title</h1>
   {#each configs as { regex, replace }, i}
-    <RegexInput bind:regex bind:replace key={i} />
+    <RegexInput bind:regex bind:replace key={i} remove={() => removeField(i)} />
   {/each}
   <button
     class="material-symbols-rounded text-4xl hover:text-cyan-500 transition-colors duration-200"
-    on:click={addConfig}
+    on:click={addField}
   >
     add
   </button>
