@@ -48,13 +48,13 @@
   />
   <OptionInput
     label="Autofill reviewer"
-    bind:checked={configs.reviewer.enabled}
     name="reviewer-enabled"
+    bind:checked={configs.reviewer.enabled}
   >
     <TextInput
-      bind:value={configs.reviewer.value}
       name="reviewer"
       placeholder="Reviewer"
+      bind:value={configs.reviewer.value}
     />
   </OptionInput>
   <button on:click={handleSave} class="py-2 text-lg my-4">SAVE</button>
