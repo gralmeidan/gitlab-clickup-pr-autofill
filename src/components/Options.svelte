@@ -1,4 +1,5 @@
 <script lang="ts">
+  import OptionInput from './OptionInput.svelte';
   import type { Configs } from 'src/types/configs.types';
   import { onMount } from 'svelte';
   import TitleConfig from './TitleConfig.svelte';
@@ -37,7 +38,12 @@
 <main class="container lg:max-w-screen-lg">
   <TitleConfig
     bind:configs={configs.title.value}
-    bind:enabled={configs.title.enabled}
+    bind:checked={configs.title.enabled}
+  />
+  <OptionInput
+    label="Assign to me"
+    name="assignToMe"
+    bind:checked={configs.assignToMe}
   />
   <button on:click={handleSave}>save</button>
 </main>

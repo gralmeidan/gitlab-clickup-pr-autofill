@@ -1,11 +1,10 @@
 <script lang="ts">
-  import Checkbox from './Checkbox.svelte';
   import type { RegexConfig } from 'src/types/configs.types';
   import RegexInput from './RegexInput.svelte';
   import OptionInput from './OptionInput.svelte';
 
   export let configs: RegexConfig[];
-  export let enabled: boolean;
+  export let checked: boolean;
 
   function addField() {
     configs = [
@@ -25,7 +24,7 @@
 
 <OptionInput
   name="title"
-  bind:checked={enabled}
+  bind:checked
   label="Autofill titles based on source branch"
 >
   {#each configs as { regex, replace }, i}
