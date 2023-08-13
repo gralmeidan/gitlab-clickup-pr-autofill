@@ -1,4 +1,11 @@
-export default function autofill() {
+import type { Options } from 'src/types/configs.types';
+
+export default async function autofill() {
+  const options: Options = (await chrome.storage.sync.get('autofill-configs'))[
+    'autofill-configs'
+  ];
+  console.log(options);
+
   const showLoading = () => {
     document.createElement('div');
 
@@ -34,9 +41,11 @@ export default function autofill() {
       '#merge_request_title'
     ) as HTMLInputElement;
 
-    const prTitle = from!
-      .replace(/(\S+)\W(CU\W\S+)/, '[ $2 ] $1')
-      .replace(/\-/g, (match, index) => (index == 4 ? match : ' '));
+    let prTitle = from;
+
+    for (const { regex, replace } of options.title.value) {
+      prTitle = prTitle.replace(new RegExp(regex), replace);
+    }
 
     titleInput.value = prTitle;
   };
@@ -92,7 +101,7 @@ export default function autofill() {
       'dropdown-input-field'
     ) as HTMLCollectionOf<HTMLInputElement>;
 
-    reviewerSearchInput.value = 'Pedro Antonio';
+    reviewerSearchInput.value = options.reviewer.value;
 
     const getReviewerLi = () => {
       const [__, reviewerResultsContainer] = document.getElementsByClassName(
@@ -110,9 +119,10 @@ export default function autofill() {
     await waitFor(() => {
       const reviewer = getReviewerLi();
 
-      const [reviewerName] = reviewer?.getElementsByTagName('strong') ?? [];
+      const [reviewerName] =
+        reviewer?.getElementsByClassName('dropdown-menu-user-username') ?? [];
 
-      return reviewerName?.textContent?.includes('Pedro Antonio');
+      return reviewerName?.textContent?.includes(options.reviewer.value);
     });
 
     getReviewerLi()!.getElementsByTagName('a')[0].click();
@@ -120,8 +130,16 @@ export default function autofill() {
     removeLoading();
   };
 
-  showLoading();
-  changePRTitle();
-  assignToMe();
-  setReviewerToPedro();
+  if (options.title.enabled) {
+    changePRTitle();
+  }
+
+  if (options.assignToMe) {
+    assignToMe();
+  }
+
+  if (options.reviewer.enabled) {
+    showLoading();
+    setReviewerToPedro();
+  }
 }
