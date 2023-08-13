@@ -1,13 +1,13 @@
 <script lang="ts">
   import OptionInput from './OptionInput.svelte';
-  import type { Configs } from 'src/types/configs.types';
+  import type { Options } from 'src/types/configs.types';
   import { onMount } from 'svelte';
-  import TitleConfig from './TitleConfig.svelte';
   import TextInput from './TextInput.svelte';
+  import TitleOption from './TitleOption.svelte';
 
   const STORAGE_KEY = 'autofill-configs';
 
-  let configs: Configs = {
+  let configs: Options = {
     assignToMe: true,
     reviewer: {
       enabled: true,
@@ -42,7 +42,7 @@
     name="assignToMe"
     bind:checked={configs.assignToMe}
   />
-  <TitleConfig
+  <TitleOption
     bind:configs={configs.title.value}
     bind:checked={configs.title.enabled}
   />

@@ -8,7 +8,7 @@ export type OptionalConfig<T> = {
   value: T;
 };
 
-export type Configs = {
+export type Options = {
   title: OptionalConfig<RegexConfig[]>;
   reviewer: OptionalConfig<string>;
   assignToMe: boolean;
