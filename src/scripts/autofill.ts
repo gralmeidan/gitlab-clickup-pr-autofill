@@ -4,7 +4,6 @@ export default async function autofill() {
   const options: Options = (await chrome.storage.sync.get('autofill-configs'))[
     'autofill-configs'
   ];
-  console.log(options);
 
   const showLoading = () => {
     document.createElement('div');
@@ -32,6 +31,18 @@ export default async function autofill() {
     document.body.appendChild(loading);
   };
 
+  let parseRegex = (str: string): RegExp => {
+    const match = str.match(/^\/(.+)\/([gimsuy]+)$/);
+
+    if (!match) {
+      return RegExp(str);
+    }
+
+    const [_, body, flags] = match;
+
+    return RegExp(body, flags);
+  };
+
   const changePRTitle = () => {
     const [from, _] = [
       ...document.querySelectorAll('#new_merge_request code'),
@@ -44,7 +55,7 @@ export default async function autofill() {
     let prTitle = from;
 
     for (const { regex, replace } of options.title.value) {
-      prTitle = prTitle.replace(new RegExp(regex), replace);
+      prTitle = prTitle.replace(parseRegex(regex), replace);
     }
 
     titleInput.value = prTitle;
