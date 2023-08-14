@@ -4,6 +4,7 @@
   import { onMount } from 'svelte';
   import TextInput from './TextInput.svelte';
   import TitleOption from './TitleOption.svelte';
+  import CopyPaste from './CopyPaste.svelte';
 
   const STORAGE_KEY = 'autofill-configs';
 
@@ -37,6 +38,10 @@
 </script>
 
 <main class="container lg:max-w-screen-lg">
+  <div class="flex justify-between">
+    <h1 class="my-3">Options</h1>
+    <CopyPaste bind:configs />
+  </div>
   <OptionInput
     label="Assign to me"
     name="assignToMe"

@@ -30,10 +30,7 @@
   {#each configs as { regex, replace }, i}
     <RegexInput bind:regex bind:replace key={i} remove={() => removeField(i)} />
   {/each}
-  <button
-    class="material-symbols-rounded text-4xl hover:text-cyan-500 transition-colors duration-200"
-    on:click={addField}
-  >
+  <button class="material-symbols-rounded text-4xl" on:click={addField}>
     add
   </button>
 </OptionInput>
