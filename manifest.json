@@ -13,5 +13,11 @@
   "background": {
     "service_worker": "src/background.ts"
   },
-  "permissions": ["storage", "activeTab", "scripting"]
+  "permissions": ["storage", "activeTab", "scripting"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "firefox@pr-autofill",
+      "strict_min_version": "1.0"
+    }
+  }
 }
