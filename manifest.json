@@ -1,6 +1,6 @@
 {
-  "name": "Svelete Tailwind Chrome Extension",
-  "description": "Sample Extension using Svelte and Tailwind",
+  "name": "Gitlab PR Autofill",
+  "description": "Autofills gitlab pull requests",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
@@ -13,7 +13,11 @@
   "background": {
     "service_worker": "src/background.ts"
   },
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
   "browser_specific_settings": {
     "gecko": {
       "id": "firefox@pr-autofill",
