@@ -1,10 +1,6 @@
 import type { Options } from 'src/types/configs.types';
 
-export default async function autofill() {
-  const options: Options = (await chrome.storage.sync.get('autofill-configs'))[
-    'autofill-configs'
-  ];
-
+export default async function autofill(options: Options) {
   const showLoading = () => {
     document.createElement('div');
 
@@ -62,8 +58,6 @@ export default async function autofill() {
   };
 
   const assignToMe = () => {
-    console.log('Assigning to Me');
-
     const [assignee] = document.getElementsByClassName(
       'dropdown-toggle-text'
     ) as HTMLCollectionOf<HTMLSpanElement>;
