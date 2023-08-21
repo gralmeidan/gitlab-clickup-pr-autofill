@@ -1,14 +1,27 @@
 {
-  "name": "Gitlab-Clickup Autofill",
-  "version": "0.0.1",
-  "description": "Autofills gitlab pull requests with clickup data",
+  "name": "Gitlab PR Autofill",
+  "description": "Autofills gitlab pull requests",
+  "version": "1.0",
   "manifest_version": 3,
-  "author": "Gralmeidan",
   "action": {
     "default_title": "Click to autofill"
   },
-  "permissions": ["activeTab", "scripting"],
+  "options_ui": {
+    "page": "src/options/index.html",
+    "open_in_tab": true
+  },
   "background": {
-    "service_worker": "dist/background.js"
+    "service_worker": "src/background.ts"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "firefox@pr-autofill",
+      "strict_min_version": "1.0"
+    }
   }
 }
