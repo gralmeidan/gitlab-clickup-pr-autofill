@@ -9,4 +9,4 @@ delete manifest.background.service_worker;
 
 manifest.background.scripts = [service_worker];
 
-fs.writeFileSync('./dist/manifest-firefox.json', JSON.stringify(manifest));
+fs.writeFileSync('./dist/manifest.json', JSON.stringify(manifest));
